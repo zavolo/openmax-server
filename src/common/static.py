@@ -1,3 +1,5 @@
+from textwrap import dedent
+
 class Static:
     """Тут просто статические константы для их дальнейшего использования"""
     def __init__(self):
@@ -15,6 +17,15 @@ class Static:
 
     class ChatTypes:
         DIALOG = "DIALOG"
+
+    class BotMessageTypes:
+        WELCOME_ALREADY_REGISTERED = "welcome_already_registered"
+        WELCOME_NEW_USER = "welcome_new_user"
+        REGISTRATION_SUCCESS = "registration_success"
+        ACCOUNT_ALREADY_EXISTS = "account_already_exists"
+        ID_NOT_WHITELISTED = "id_not_whitelisted"
+        INTERNAL_ERROR = "internal_error"
+        INCOMING_CODE = "incoming_code"
 
     ERROR_TYPES = {
         "not_implemented": {
@@ -67,6 +78,38 @@ class Static:
         }
     }
 
+    ### Сообщения бота
+    BOT_MESSAGES = {
+        "welcome_already_registered": dedent("""
+            👋 С возвращением в OpenMAX!
+            Ваш номер, если забыли: {phone}
+        """).strip(),
+        "welcome_new_user": dedent("""
+            👋 Добро пожаловать на этот инстанс OpenMAX!
+            У вас ещё нет аккаунта. Используйте /register для создания.
+        """).strip(),
+        "registration_success": dedent("""
+            ✅ Регистрация завершена!
+            Ваш новый номер: {new_phone}
+            Все коды для авторизации будут приходить сюда.
+        """).strip(),
+        "account_already_exists": dedent("""
+            ❌ У вас уже есть аккаунт.
+        """).strip(),
+        "id_not_whitelisted": dedent("""
+            ❌ Ваш ID не находится в белом списке.
+        """).strip(),
+        "internal_error": dedent("""
+            ❌ Ошибка при регистрации аккаунта.
+        """).strip(),
+        "incoming_code": dedent("""
+            Новая попытка входа в OpenMAX с вашим номером {phone}
+            Код: {code}
+            ❗️ Никому не сообщайте его, иначе можете потерять свой аккаунт!
+        """).strip()
+    }
+
+    ### Причины для жалоб
     COMPLAIN_REASONS = [
         # TODO: Было бы очень замечательно заполнить этот лист причинами для жалоб
     ]
@@ -82,3 +125,41 @@ class Static:
     }]
 
     ALL_CHAT_FOLDER_ORDER = ["all.chat.folder"]
+
+    ### Стандартные папки с настройками пользователя
+    USER_FOLDERS = {
+        "folders": [], 
+        "foldersOrder": [], 
+        "allFilterExcludeFolders": []
+    }
+
+    USER_SETTINGS = {
+        "CHATS_PUSH_NOTIFICATION": "ON",
+        "PUSH_DETAILS": True,
+        "PUSH_SOUND": "DEFAULT",
+        "INACTIVE_TTL": "6M",
+        "CHATS_QUICK_REPLY": False,
+        "SHOW_READ_MARK": True,
+        "AUDIO_TRANSCRIPTION_ENABLED": True,
+        "CHATS_LED": 65535,
+        "SEARCH_BY_PHONE": "ALL",
+        "INCOMING_CALL": "ALL",
+        "DOUBLE_TAP_REACTION_DISABLED": False,
+        "SAFE_MODE_NO_PIN": False,
+        "CHATS_PUSH_SOUND": "DEFAULT",
+        "DOUBLE_TAP_REACTION_VALUE": None,
+        "FAMILY_PROTECTION": "OFF",
+        "LED": 65535,
+        "HIDDEN": False,
+        "VIBR": True,
+        "CHATS_INVITE": "ALL",
+        "PUSH_NEW_CONTACTS": False,
+        "UNSAFE_FILES": True,
+        "DONT_DISTURB_UNTIL": 0,
+        "CHATS_VIBR": True,
+        "CONTENT_LEVEL_ACCESS": False,
+        "STICKERS_SUGGEST": "ON",
+        "SAFE_MODE": False,
+        "M_CALL_PUSH_NOTIFICATION": "ON",
+        "QUICK_REPLY": False
+    }
